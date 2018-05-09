@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传样例</title>
+    <script type="text/javascript" src="/js/fileup.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var _UP_paras = {
+            previewImg_id: "imgshow",
+            progressBar_id: "progressBar",      //上传进度条
+            percentage_id: "percentage",        //上传进度情况(文字)显示: x%
+            time_id: "time"                     //上传进度情况(文字)显示: 速度：1.8M/s，剩余时间：0.0s
+        };
+        function UpladFile(){
+            var url = "/ufile"; // 接收上传文件的后台地址
+            var fields = {
+                eno: "0000000000000000",
+                title: "this is a title",
+                txt: "this is desction, 加点中文"
+            };
+            UP_UpladFile(url, fields);
+        }
+        //上传成功响应
+        function uploadComplete(evt) {
+            //服务断接收完文件返回的结果
+            var data = JSON.parse(evt.target.responseText);
+            var res = document.getElementById("res");
+            if(data.success) {
+                //alert("上传成功！");
+                res.innerHTML = "上传成功！"+evt.target.responseText;
+            }else{
+                //alert("上传失败！");
+                res.innerHTML = "上传失败！"+evt.target.responseText;
+            }
+
+        }
+        //上传失败
+        function uploadFailed(evt) {
+            alert("上传失败！");
+        }
+    </script>
+</head>
+<body>
+<div style="width:350px"><img id="imgshow" style="width:100%" /></div>
+<div>
+    <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+    <span id="percentage"></span>
+    <div id="time"></div>
+</div>
+<div>
+    <input type="file" id="file" name="myfile" style="width: 70px" onchange="previewPic(this)" accept="image/x-png, image/jpg, image/jpeg, image/gif"/>
+    <input type="button" onclick="UpladFile()" value="上传" />
+    <input type="button" onclick="cancleUploadFile()" value="取消" />
+</div>
+<div id="res">显示上传结果</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "fileupload",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.15.3",
+    "moment":"2.18.1",
+    "multiparty": "4.1.3"
+  }
+}
